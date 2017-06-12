@@ -1,19 +1,17 @@
 <?php
 header("Content-Type: text/html; charset=utf-8");
+require_once __DIR__ . '/../RP2-Framework/bootstrap.php';
 
-require_once __DIR__ . '/../3rd-party/RP2-Framework/bootstrap.php';
+$backupPath = __DIR__."/backups_tmp/".date("Y")."/".date("m")."/".date("d");
 
 $mySqlBackup = new \rpf\extension\module\mySqlBackup();
 
-$mySqlBackup->setBackupFolderPath(__DIR__."/backups_tmp");
+$mySqlBackup->setBackupFolderPath($backupPath);
 
 $databases = $mySqlBackup->getDatabaseInformations();
 
 $mySqlBackup->createFullBackup($databases);
 
-foreach ($databases as $database){
-    $mySqlBackup->createSingleBackup($database['hostip'],$database['pk'],$database['password'],$database['name']);
-}
+file_put_contents($backupPath."/log.txt",print_r($mySqlBackup->getProtocol(),true));
 
 $mySqlBackup->sendProtocol("lb@1601.com");
-
