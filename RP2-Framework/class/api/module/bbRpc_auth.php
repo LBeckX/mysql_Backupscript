@@ -30,6 +30,9 @@ class bbRpc_auth extends apiModule
             $this->rpcUserId  = \bbRpc::auth($username, $password);
             if ($this->rpcUserId != false)
             {
+                if(!isset($_SERVER['REMOTE_ADDR'])){
+                    $_SERVER['REMOTE_ADDR'] = '__commandLineInterfaceCall__';
+                }
                 log::info("Login as $username (ID: {$this->rpcUserId}) from ".$_SERVER['REMOTE_ADDR'], __METHOD__."($username, *******)");
                 $this->getApi()->getRpcMessages()->getMessages();
                 return true;
