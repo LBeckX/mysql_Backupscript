@@ -4,7 +4,7 @@ RewriteBase /
 RewriteCond %{SERVER_PORT} !^443$ [nc]
 RewriteRule (.*) https://%{HTTP_HOST}/$1 [R=permanent,nc,L]
 
-#AuthType Basic
-#AuthName "Freigabeserver - contact admin@1601.com"
-#AuthUserFile /kunden/226796_91058/kunden/beck.freigabeserver.de/mySql_Backupscript/.htpasswd
-#Require valid-user
+AuthType Basic
+AuthName "Freigabeserver - contact admin@1601.com"
+AuthUserFile /kunden/226796_91058/kunden/beck.freigabeserver.de/mySql_Backupscript/.htpasswd
+Require valid-user
