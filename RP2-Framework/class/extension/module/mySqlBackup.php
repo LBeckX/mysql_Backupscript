@@ -180,17 +180,17 @@ class mySqlBackup extends extensionModule {
             }
         }
 
-        // return the object
+        // return the instance
         return $this;
     }
 
     /**
-     * Send the protocol as email
+     * Send the protocol as an email
      * @param string $email
      * @param string $subject
      * @return bool
      */
-    public function sendProtocol($email = '',$subject = '[RPF] MySQL dump protocol'){
+    public function sendProtocol($email = 'admin@1601.com',$subject = '[RPF] MySQL dump protocol'){
 
         if(empty($this->protocol)){
             log::notice('The protocol is empty',__METHOD__);
@@ -274,6 +274,7 @@ class mySqlBackup extends extensionModule {
         // Create the tmp file for the dump information
         if(!touch($tempFilePath)) {
             log::error('Can\'t create the tmp log file',__METHOD__);
+            return false;
         }
 
         // Create the dump command for shell
@@ -283,7 +284,7 @@ class mySqlBackup extends extensionModule {
         $backupBegin = microtime(true);
 
         // Execute the mysql dump
-        $cmdResult = passthru($cmd);
+        passthru($cmd);
 
         // Safe the begin time
         $backupEnd = microtime(true);
@@ -322,7 +323,7 @@ class mySqlBackup extends extensionModule {
     }
 
     /**
-     * Create the backup folder
+     * Create the backup dump folder
      * @return bool
      * @throws \Exception
      */
