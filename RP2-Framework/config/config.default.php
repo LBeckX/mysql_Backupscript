@@ -32,5 +32,5 @@ error_reporting(E_ALL);
 setlocale (LC_ALL, 'de_DE@euro', 'de_DE', 'de', 'ge');
 mb_internal_encoding("UTF-8");
 spl_autoload_register('\rpf\classLoader');
-set_exception_handler('\rpf\exceptionHandler');
-set_error_handler('\rpf\errorHandler');
+//set_exception_handler('\rpf\exceptionHandler');
+//set_error_handler('\rpf\errorHandler');
